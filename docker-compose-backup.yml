@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  # --- MACHINE 1 : Le Chef (NameNode) ---
+  namenode:
+    image: apache/hadoop:3
+    hostname: namenode
+    container_name: namenode
+    command: ["hdfs", "namenode"]
+    ports:
+      - 9870:9870  # Interface Web Hadoop
+    environment:
+      ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
+    volumes:
+      - ./data/namenode:/tmp/hadoop-root/dfs/name
+
+  # --- MACHINE 2 : Ouvrier 1 (DataNode) ---
+  datanode1:
+    image: apache/hadoop:3
+    container_name: datanode1
+    command: ["hdfs", "datanode"]
+    environment:
+      ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
+    depends_on:
+      - namenode
+
+  # --- MACHINE 3 : Ouvrier 2 (DataNode) ---
+  datanode2:
+    image: apache/hadoop:3
+    container_name: datanode2
+    command: ["hdfs", "datanode"]
+    environment:
+      ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
+    depends_on:
+      - namenode
+
+  # --- MACHINE 4 : Le Cerveau (Spark + Jupyter + Python) ---
+  spark-client:
+    image: jupyter/pyspark-notebook:latest
+    container_name: spark-client
+    ports:
+      - "8888:8888" # Accès au Notebook
+      - "4040:4040" # Monitoring Spark
+    volumes:
+      - ./input_data:/home/jovyan/work # Lien entre Windows et le container
+    environment:
+      - JUPYTER_TOKEN=bigdata # Mot de passe simple
+    depends_on:
+      - namenode
