@@ -8,17 +8,6 @@ Ce dépôt contient l'infrastructure et le code nécessaires au déploiement d'u
 
 ---
 
-## 📋 Table des Matières
-1. [Contexte et Objectifs](#-contexte-et-objectifs)
-2. [Architecture Technique](#-architecture-technique)
-3. [Prérequis](#-prérequis)
-4. [Installation et Démarrage](#-installation-et-démarrage)
-5. [Utilisation et Analyse](#-utilisation-et-analyse)
-6. [Sécurité et Kerberos](#-sécurité-et-kerberos)
-7. [Auteurs](#-auteurs)
-
----
-
 ## 🎯 Contexte et Objectifs
 
 L'objectif de ce projet est de simuler un environnement de production Big Data sur une machine locale (Windows/Linux) en surmontant les contraintes de ressources matérielles.
@@ -54,11 +43,4 @@ Avant de lancer le projet, assurez-vous d'avoir :
 
 > **⚠️ Note pour Windows :** Il est fortement recommandé d'utiliser le backend **WSL 2** dans Docker Desktop pour éviter les problèmes de performance et de permissions sur les volumes montés.
 
----
-
-## 🚀 Installation et Démarrage
-
-### 1. Cloner le dépôt
-```bash
-git clone [https://github.com/votre-user/projet-hadoop-spark-kerberos.git](https://github.com/votre-user/projet-hadoop-spark-kerberos.git)
-cd projet-hadoop-spark-kerberos
+--
